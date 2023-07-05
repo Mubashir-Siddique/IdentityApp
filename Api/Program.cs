@@ -1,4 +1,5 @@
 using Api.Data;
+using Api.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,20 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+
+// defining our IdentityCore Service
+builder.Services.AddIdentityCore<User>(options =>
+{
+    // password configuration
+    options.Password.RequiredLength = 6;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+
+    options.SignIn.RequireConfirmedEmail = true;
 });
 
 var app = builder.Build();
