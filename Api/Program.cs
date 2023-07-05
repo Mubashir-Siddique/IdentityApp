@@ -22,7 +22,7 @@ builder.Services.AddDbContext<Context>(options =>
 });
 
 
-// defining our IdentityCore Service
+    // defining our IdentityCore Service
 builder.Services.AddIdentityCore<User>(options =>
 {
     // password configuration
@@ -44,7 +44,7 @@ builder.Services.AddIdentityCore<User>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+    // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
