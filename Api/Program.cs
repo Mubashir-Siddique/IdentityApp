@@ -1,6 +1,7 @@
 using Api.Data;
 using Api.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +33,14 @@ builder.Services.AddIdentityCore<User>(options =>
     options.Password.RequireNonAlphanumeric = false;
 
     options.SignIn.RequireConfirmedEmail = true;
-});
+})
+
+    .AddRoles<IdentityRole>()                           // be able to add roles
+    .AddRoleManager<RoleManager<IdentityRole>>()        // be able to make use of RoleManager
+    .AddEntityFrameworkStores<Context>()                // providing our Context
+    .AddSignInManager<SignInManager<User>>()            // make use of Signin Manager
+    .AddUserManager<UserManager<User>>()                // make use of userManager to create Users
+    .AddDefaultTokenProviders();                        // be able to create tokens for email confirmation
 
 var app = builder.Build();
 
