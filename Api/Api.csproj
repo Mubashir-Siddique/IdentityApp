@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,8 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <!-- This pacakage is to aunthenticate user using JWT Bearer-->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.8" />
+	  <!-- This pacakage is to be able to drive from IdentityDbContext inside our context.cs class-->
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+	  <!-- This pacakage is to be ale to communicate with SQL Server via EF-->
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
+	  <!-- This pacakage is to ADD/REMOVE migrations to our server-->
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
+		  
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	  <!-- This pacakage is to be able to create serialize and validate JSON web tokens-->
+
+	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
   </ItemGroup>
 
   <ItemGroup>
